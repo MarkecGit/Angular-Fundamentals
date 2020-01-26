@@ -18,7 +18,7 @@ import {
 import { EventsAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
 //import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
-import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent  } from './common/index'; 
+import { JQ_TOKEN, TOASTR_TOKEN, Toastr, CollapsibleWellComponent, SimpleModalComponent  } from './common/index'; 
 import { appRoutes} from './routes';
 import { Error404Component } from './errors/404.component';
 import { AuthService } from './user/auth.service';
@@ -46,6 +46,7 @@ let jQuery = window['$'];
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
+    SimpleModalComponent,
     DurationPipe
   ], 
   providers: [
