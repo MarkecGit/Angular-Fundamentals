@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
 import { IEvent, ISession } from './event.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 
@@ -22,27 +22,25 @@ export class EventService {
       // return subject;
     }
 
-    private handleError<T> (operation = 'operation', result?:  T) {
-      return (error: any): Observable<T> => {
-        console.error(error);
-        return of(result as T);
-      }      
-    }
-
-    getEvent(id: number): IEvent {
-      return EVENTS.find(event => event.id === id);
+    getEvent(id: number):Observable<IEvent> {
+      return this.http.get<IEvent>('/api/events/' + id)
+        .pipe(catchError(this.handleError<IEvent>('getEvent')));
+      //return EVENTS.find(event => event.id === id);
     }
 
     saveEvent(event) {
-      event.id = 999;
-      event.session = [];
-      EVENTS.push(event);
+      let options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+      return this.http.post<IEvent>('/api/events', event, options)
+        .pipe(catchError(this.handleError<IEvent>('saveEvent')));
+      // event.id = 999;
+      // event.session = [];
+      // EVENTS.push(event);
     }
 
-    updateEvent(event) {
-      let index = EVENTS.findIndex(x => x.id = event.id);
-      EVENTS[index] = event;
-    }
+    // updateEvent(event) {
+    //   let index = EVENTS.findIndex(x => x.id = event.id);
+    //   EVENTS[index] = event;
+    // }
 
     searchSessions(searchTerm: string) {
       var term = searchTerm.toLocaleLowerCase();
@@ -64,12 +62,19 @@ export class EventService {
       }, 100);
       return emitter;
     }
+
+    private handleError<T> (operation = 'operation', result?:  T) {
+      return (error: any): Observable<T> => {
+        console.error(error);
+        return of(result as T);
+      }      
+    }
 }
 
 const EVENTS: IEvent[] = [
     {
       id: 1,
-      name: 'Angular Connect',
+      name: 'Angular Connect12',
       date: new Date('9/26/2036'),
       time: '10:00 am',
       price: 599.99,
