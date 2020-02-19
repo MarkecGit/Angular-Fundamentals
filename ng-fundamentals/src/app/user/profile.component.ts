@@ -53,6 +53,13 @@ export class ProfileComponent implements OnInit {
     
   }
 
+  logout() {
+    this.authService.logout()
+    .subscribe(() => {
+      this.router.navigate(['/user/login']);
+    }); 
+  }
+
   cancel() {
     this.router.navigate(['events']);
   }
