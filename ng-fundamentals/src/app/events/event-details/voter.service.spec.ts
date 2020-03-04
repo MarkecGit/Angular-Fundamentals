@@ -44,7 +44,6 @@ describe('VoterService', () => {
             voterService.addVoter(3, <ISession>session, "joe");
 
             expect(mockHttp.post).toHaveBeenCalledWith('/api/events/3/sessions/6/voters/joe', {}, jasmine.any(Object));
-
         })
     })
 
