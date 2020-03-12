@@ -1,12 +1,13 @@
 import { ComponentFixture, async, TestBed } from "@angular/core/testing"
 import { SessionListComponent } from './session-list.component'
-import { DebugElement } from '@angular/core'
+import { DebugElement, Component, NO_ERRORS_SCHEMA } from '@angular/core'
 import { AuthService } from 'src/app/user/auth.service'
 import { VoterService } from '.'
-import { UpvoteComponent } from './upvote.component'
+//import { UpvoteComponent } from './upvote.component'
 import { DurationPipe } from '../shared'
 import { CollapsibleWellComponent } from 'src/app/common'
 import { By } from '@angular/platform-browser'
+
 
 
 describe('SessionListComponent', () => {
@@ -14,7 +15,7 @@ describe('SessionListComponent', () => {
         component: SessionListComponent,
         element: HTMLElement,
         debugEl: DebugElement
-
+ 
     beforeEach(async(() => {
         let mockAuthService = {
             isAuthenticated: () => true,
@@ -28,18 +29,18 @@ describe('SessionListComponent', () => {
            imports: [],
            declarations: [
                SessionListComponent,
-               UpvoteComponent,
-               CollapsibleWellComponent,
+               //UpvoteComponent,
+               //CollapsibleWellComponent,
                DurationPipe
            ],
            providers: [
                { provide: AuthService, useValue: mockAuthService },
                { provide: VoterService, useValue: mockVoterService }
            ],
-           schemas: []
+           schemas: [
+               NO_ERRORS_SCHEMA
+           ]
         })
-
-
     }))
 
     beforeEach(() => {
